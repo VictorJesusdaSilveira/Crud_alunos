@@ -5,7 +5,7 @@ class AlunoController{
 
     public function listar(){
         $alunoDAO = new AlunoDAO();
-        return $alunoDAO->listar();
+        return $alunoDAO->list();
     }
 
 }
