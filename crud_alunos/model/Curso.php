@@ -6,6 +6,10 @@ class Curso {
     private ?string $turno;
 
 
+    public function __toString(){
+        return $this->nome . "(" . $this->getTurnoDesc();
+    }
+
     /**
      * Get the value of id
      */
@@ -48,6 +52,18 @@ class Curso {
     public function getTurno(): ?string
     {
         return $this->turno;
+    }
+
+    public function getTurnoDesc(){
+        if($this->turno == "M"){
+            return "Matutino";
+        }else if ($this->turno == "V"){
+            return "Vespertino";
+        }else if ($this->turno == "N"){
+            return "Noturno";
+        }
+
+        return "";
     }
 
     /**

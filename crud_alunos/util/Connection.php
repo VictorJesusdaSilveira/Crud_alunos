@@ -18,7 +18,7 @@ class Connection {
                     //Define o tipo do retorno das consultas como array associativo
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
 
-                //Cria a conexão...
+                //Cria a conexão
                 $strConn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
                 
                 self::$conn = new PDO($strConn, DB_USER, DB_PASSWORD, $opcoes);
