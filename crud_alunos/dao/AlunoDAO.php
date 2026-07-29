@@ -6,29 +6,34 @@ require_once(__DIR__ . "/../model/Aluno.php");
 class AlunoDAO{
     
     public function list(){
-        $conexao = Connection::getConnection();
+            $conexao = Connection::getConnection();
 
-        $sql = "SELECT a.*, c.nome nome_curso, c.turno turno_curso
-                FROM alunos a
-                JOIN cursos c ON (c.id = a.id_curso)";
-        $stm = $conexao->prepare($sql);
-        $stm->execute();
-        $dados = $stm->fetchALL();
-        return $this->map($dados);
-    }
+            $sql = "SELECT a.*, c.nome nome_curso, c.turno turno_curso
+                    FROM alunos a
+                    JOIN cursos c ON (c.id = a.id_curso)";
+            $stm = $conexao->prepare($sql);
+            $stm->execute();
+            $dados = $stm->fetchALL();
+            return $this->map($dados);
+        }
 
     public function insert(Aluno $aluno){
-        $conexao = Connection::getConnection();
+        try{
+            $conexao = Connection::getConnection();
 
-        $sql = "INSERT INTO alunos (nome, idade, estrangeiro, id_curso)
-                VALUES (:nome,:idade,:estrangeiro,:id_curso)"; //:nome e os outros é só uma forma diferente de passar os parâmetros igual a interrogação (?)
+            $sql = "INSERT INTO alunos (nome, idade, estrangeiro, id_curso)
+                    VALUES (:nome,:idade,:estrangeiro,:id_curso)"; //:nome e os outros é só uma forma diferente de passar os parâmetros igual a interrogação (?)
 
-        $stm = $conexao->prepare($sql);
-        $stm->bindValue("nome", $aluno->getNome());
-        $stm->bindValue("idade", $aluno->getIdade());
-        $stm->bindValue("estrangeiro", $aluno->getEstrangeiro());
-        $stm->bindValue("id_curso", $aluno->getCurso()->getId());
-        $stm->execute();
+            $stm = $conexao->prepare($sql);
+            $stm->bindValue("nome", $aluno->getNome());
+            $stm->bindValue("idade", $aluno->getIdade());
+            $stm->bindValue("estrangeiro", $aluno->getEstrangeiro());
+            $stm->bindValue("id_curso", $aluno->getCurso()->getId());
+            $stm->execute();
+            return "";
+        }catch(PDOException $e){
+            return "Erro ao salvar o aluno. Tente novamente";
+        }
     }
 
     private function map(array $dados){
