@@ -17,6 +17,20 @@ class AlunoDAO{
         return $this->map($dados);
     }
 
+    public function insert(Aluno $aluno){
+        $conexao = Connection::getConnection();
+
+        $sql = "INSERT INTO alunos (nome, idade, estrangeiro, id_curso)
+                VALUES (:nome,:idade,:estrangeiro,:id_curso)"; //:nome e os outros é só uma forma diferente de passar os parâmetros igual a interrogação (?)
+
+        $stm = $conexao->prepare($sql);
+        $stm->bindValue("nome", $aluno->getNome());
+        $stm->bindValue("idade", $aluno->getIdade());
+        $stm->bindValue("estrangeiro", $aluno->getEstrangeiro());
+        $stm->bindValue("id_curso", $aluno->getCurso()->getId());
+        $stm->execute();
+    }
+
     private function map(array $dados){
         $alunos = array();
 

@@ -51,9 +51,11 @@ include(__DIR__ . "/../include/header.php");
     </div>
 </form>
 
+<div style="color: red;">
+    <?= $msgErro ?>
+</div>
+
 <a href="listar.php">Voltar</a>
-
-
 
 <?php
 include(__DIR__ .  "/../include/footer.php");
