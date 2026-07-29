@@ -23,7 +23,10 @@ class AlunoController{
 
         //Persistir
         if(empty($erros)){
-            $this->alunoDAO->insert($aluno);
+            $erroDAO = $this->alunoDAO->insert($aluno);
+            if ($erroDAO) {
+                array_push($erros, $erroDAO);
+            }
         }
 
         return $erros;
