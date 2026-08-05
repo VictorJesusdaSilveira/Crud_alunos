@@ -23,7 +23,10 @@ class Connection {
                 
                 self::$conn = new PDO($strConn, DB_USER, DB_PASSWORD, $opcoes);
             } catch(PDOException $e) {
-                echo "Erro ao conectar na base de dados.<br>";
+                $erro = "Erro ao conectar na base de dados.<br>";
+                if(AMB_DEV){
+                    $erro .= $e->getMessage();
+                }
                 print_r($e);
             }
         }

@@ -4,6 +4,7 @@ require_once(__DIR__ . "/../../model/Curso.php");
 require_once(__DIR__ . "/../../controller/AlunoController.php");
 
 $msgErro = null;
+$aluno = null;
 
 //Verificação se o form foi enviado
 if(isset($_POST["nome"])){
@@ -33,7 +34,5 @@ if(isset($_POST["nome"])){
 }
 
 require_once(__DIR__ . "/form.php");
-
-
 ?>
 

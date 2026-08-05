@@ -33,5 +33,9 @@ class AlunoController{
 
     }
 
+    public function excluir($id){
+        return $this->alunoDAO->delete($id);
+    }
+
 }
 ?>
