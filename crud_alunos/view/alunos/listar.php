@@ -38,7 +38,7 @@ include(__DIR__ . "/../include/header.php");
             <td><?= $a->getCurso()->getNome() ?></td>
             <td><?= $a->getCurso()->getTurnoDesc() ?></td>
             <td>
-                <a href="alterar.php"><img src="../../img/btn_editar.png" alt=""></a>
+                <a href="alterar.php?id= <?= $a->getId() ?>"><img src="../../img/btn_editar.png" alt=""></a>
             </td>
             <td>
                 <a href="excluir.php?id=<?= $a->getId() ?>"

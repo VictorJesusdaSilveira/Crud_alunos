@@ -51,6 +51,10 @@ include(__DIR__ . "/../include/header.php");
     </div>
 
     <div>
+        <input type="hidden" name="id" value="<?= $aluno ? $aluno->getId() : 0 ?>">
+    </div>
+
+    <div>
         <button type="submit">Salvar</button>
     </div>
 </form>

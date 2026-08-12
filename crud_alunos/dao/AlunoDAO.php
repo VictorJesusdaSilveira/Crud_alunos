@@ -40,7 +40,7 @@ class AlunoDAO{
         }
     }
 
-    public function delete($id){
+    public function delete(int $id){
         try{
             $conexao = Connection::getConnection();
 
@@ -53,6 +53,47 @@ class AlunoDAO{
             $erro = "Erro ao excluir o aluno. Tente novamente";
             if(AMB_DEV){
                 $erro .= "<br>" . $e->getMessage();
+            }
+            return $erro;
+        }
+    }
+
+    public function findById(int $id): ?Aluno{
+         $conexao = Connection::getConnection();
+
+            $sql = "SELECT a.*, c.nome nome_curso, c.turno turno_curso
+                    FROM alunos a
+                    JOIN cursos c ON (c.id = a.id_curso)
+                    WHERE a.id = ?";
+            $stm = $conexao->prepare($sql);
+            $stm->execute([$id]);
+            $dados = $stm->fetchALL();
+            $alunos = $this->map($dados);
+
+            if(! empty($alunos)){
+                return $alunos[0];
+            }else{
+                return null;
+            }
+    }
+
+    public function update(Aluno $aluno){
+        try{
+            $conexao = Connection::getConnection();
+            $sql = "UPDATE alunos 
+                    SET nome = :nome, idade = :idade, estrangeiro = :estrangeiro, id_curso = :id_curso
+                    WHERE id = :id";
+            $stm = $conexao->prepare($sql);
+            $stm->bindValue("nome", $aluno->getNome());
+            $stm->bindValue("idade", $aluno->getIdade());
+            $stm->bindValue("estrangeiro", $aluno->getEstrangeiro());
+            $stm->bindValue("id_curso", $aluno->getCurso()->getId());
+            $stm->bindValue("id", $aluno->getId());
+            $stm->execute();
+        }catch(PDOException $e){
+            $erro = "Erro ao alterar o aluno. Tente Novamente";
+            if(AMB_DEV){
+                $erro .= "<br>" . $e->getMessage(); 
             }
             return $erro;
         }
