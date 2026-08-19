@@ -11,12 +11,13 @@ $alunoCont = new AlunoController();
 $alunos = $alunoCont->listar();
 
 include(__DIR__ . "/../include/header.php");
+include(__DIR__ . "/../include/menu.php");
 ?>
 
 <h3>Listagem de Alunos</h3>
-<a href="inserir.php">Inserir</a>
+<a class="btn btn-outline-primary" href="inserir.php">Inserir</a>
 
-<table border=1>
+<table class="table table-primary table-striped mt-4">
     <tr>
         <th>ID</th>
         <th>Nome</th>

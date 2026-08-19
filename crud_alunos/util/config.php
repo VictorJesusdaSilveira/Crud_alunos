@@ -12,6 +12,10 @@ define("DB_PASSWORD", "bancodedados");
 
 //Configuração do ambiente
 define("AMB_DEV", true);
+
+//Configuração de acesso
+define("BASE_URL", "/vj/crud_alunos");
+
 ?>
 
 

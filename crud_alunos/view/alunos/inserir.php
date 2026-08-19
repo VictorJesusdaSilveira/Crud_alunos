@@ -16,7 +16,7 @@ if(isset($_POST["nome"])){
 
     //Criar objeto
     $aluno = new Aluno();
-    $aluno->setNome($nome) -> setIdade($idade) -> setEstrangeiro($estrangeiro);  
+    $aluno->setId(0) -> setNome($nome) -> setIdade($idade) -> setEstrangeiro($estrangeiro);  
     $curso = new Curso();
     $curso->setId($idCurso);
     $aluno->setCurso($curso);

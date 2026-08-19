@@ -26,7 +26,6 @@ if (isset($_POST["nome"])) {
 
     //Validação e salvar no banco
     $erros = $alunoCont->alterar($aluno);
-    print_r($erros);
 
     if(empty($erros)){
         header("location: listar.php");
